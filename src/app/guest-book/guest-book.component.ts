@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GuestBookEntry } from 'src/models/GuestBookEntry';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-guest-book',
@@ -7,9 +8,13 @@ import { GuestBookEntry } from 'src/models/GuestBookEntry';
   styles: []
 })
 export class GuestBookComponent implements OnInit {
-  @Input() entries: GuestBookEntry[];
+  entries: GuestBookEntry[];
 
-  constructor() {}
+  constructor(private dataService: DataService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dataService.getEntries().subscribe(entries => {
+      this.entries = entries;
+    });
+  }
 }

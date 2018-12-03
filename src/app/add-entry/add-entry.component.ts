@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GuestBookEntry } from 'src/models/GuestBookEntry';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-add-entry',
@@ -7,15 +8,11 @@ import { GuestBookEntry } from 'src/models/GuestBookEntry';
   styles: []
 })
 export class AddEntryComponent implements OnInit {
-  @Output() entryAdded: EventEmitter<GuestBookEntry> = new EventEmitter<
-    GuestBookEntry
-  >();
-
-  constructor() {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {}
 
   addEntry(name: HTMLInputElement, message: HTMLInputElement) {
-    return this.entryAdded.emit(new GuestBookEntry(name.value, message.value));
+    this.dataService.addEntry(new GuestBookEntry(name.value, message.value));
   }
 }
