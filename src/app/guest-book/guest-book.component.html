@@ -1,0 +1,7 @@
+<table>
+  <tr><th>Name</th><th>Message</th><th>Date</th></tr>
+  <tr *ngFor="let entry of entries">
+    <td>{{entry.name}}</td>
+    <td>{{entry.message}}</td>
+    <td>{{entry.date | date: 'M/d/yyyy'}}</td>
+  </tr>
